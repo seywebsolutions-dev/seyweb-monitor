@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seyweb Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="12" stroke="white" stroke-width="2"/>
+            <circle cx="14" cy="14" r="5" fill="white"/>
+          </svg>
+        </div>
+        <h1>Seyweb Monitor</h1>
+      </div>
+      <a href="https://github.com/seywebsolutions-dev/seyweb-monitor" class="badge">Open Source</a>
+    </header>
+
+    <main class="main">
+      <section class="hero">
+        <div class="status" id="statusCard">
+          <div class="status-indicator">
+            <span class="pulse" id="pulse"></span>
+            <span class="label" id="statusLabel">Checking</span>
+          </div>
+          <div class="meta">
+            <div class="meta-item">
+              <span class="meta-label">Uptime</span>
+              <span class="meta-value" id="uptimeValue">—</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Latest</span>
+              <span class="meta-value" id="latestValue">No data yet</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Monitor</span>
+              <span class="meta-value">https://seywebsolutions.com</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <div class="card chart">
+          <div class="card-header">
+            <h3>Uptime trend</h3>
+            <span class="hint">Last 40 checks</span>
+          </div>
+          <div class="chart-body" id="trendChart">
+            <svg viewBox="0 0 360 160" preserveAspectRatio="none" class="bar-chart">
+              <defs>
+                <linearGradient id="barUp" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgb(99,102,241)" />
+                  <stop offset="100%" stop-color="rgb(99,102,241)" stop-opacity="0.2" />
+                </linearGradient>
+              </defs>
+              <g id="bars"></g>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <span class="legend"><span class="swatch up"></span> Up</span>
+            <span class="legend"><span class="swatch down"></span> Down</span>
+            <span class="legend">15m intervals</span>
+          </div>
+        </div>
+
+        <div class="card timeline">
+          <div class="card-header">
+            <h3>Recent activity</h3>
+            <span class="hint">Live</span>
+          </div>
+          <ul class="timeline-list" id="timelineList">
+            <li class="empty">Waiting for first check…</li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Powered by GitHub Actions · Checks every 15 minutes</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
