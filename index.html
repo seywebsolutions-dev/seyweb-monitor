@@ -33,15 +33,11 @@
           </div>
           <div class="meta">
             <div class="meta-item">
-              <span class="meta-label">Uptime</span>
-              <span class="meta-value" id="uptimeValue">—</span>
-            </div>
-            <div class="meta-item">
               <span class="meta-label">Latest</span>
               <span class="meta-value" id="latestValue">No data yet</span>
             </div>
             <div class="meta-item">
-              <span class="meta-label">Monitor</span>
+              <span class="meta-label">Monitor URL</span>
               <span class="meta-value">https://seywebsolutions.com</span>
             </div>
           </div>
@@ -51,36 +47,34 @@
       <section class="grid">
         <div class="card chart">
           <div class="card-header">
-            <h3>Uptime trend</h3>
-            <span class="hint">Last 40 checks</span>
+            <h3>Last response</h3>
+            <span class="hint">Updated on load</span>
           </div>
-          <div class="chart-body" id="trendChart">
-            <svg viewBox="0 0 360 160" preserveAspectRatio="none" class="bar-chart">
-              <defs>
-                <linearGradient id="barUp" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="rgb(99,102,241)" />
-                  <stop offset="100%" stop-color="rgb(99,102,241)" stop-opacity="0.2" />
-                </linearGradient>
-              </defs>
-              <g id="bars"></g>
-            </svg>
-          </div>
-          <div class="chart-legend">
-            <span class="legend"><span class="swatch up"></span> Up</span>
-            <span class="legend"><span class="swatch down"></span> Down</span>
-            <span class="legend">15m intervals</span>
+          <div class="chart-body">
+            <div class="bar-wrap" id="barWrap"></div>
+            <div class="chart-meta">
+              <span class="muted" id="chartMeta">Waiting for data…</span>
+            </div>
           </div>
         </div>
 
         <div class="card timeline">
           <div class="card-header">
-            <h3>Recent activity</h3>
-            <span class="hint">Live</span>
+            <h3>Recent events</h3>
+            <span class="hint">Local cache</span>
           </div>
           <ul class="timeline-list" id="timelineList">
             <li class="empty">Waiting for first check…</li>
           </ul>
         </div>
+      </section>
+
+      <section class="card detail">
+        <div class="card-header">
+          <h3>About this monitor</h3>
+        </div>
+        <p class="detail-body">This is a free, standalone monitor. It checks <strong>https://seywebsolutions.com</strong> every 15 minutes via GitHub Actions and stores a small status file. This page reads that status directly.</p>
+        <p class="detail-body">Visit/usage counts need another source like analytics; this tool only tracks site reachability.</p>
       </section>
 
       <footer class="footer">

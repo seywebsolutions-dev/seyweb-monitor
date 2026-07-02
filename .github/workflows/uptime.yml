@@ -17,15 +17,17 @@ jobs:
       - name: Uptime check
         id: check
         run: |
-          set -e
+          set +e
           ts=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           code=$(curl -s -o /tmp/monitor.body -w "%{http_code}" "https://seywebsolutions.com" || true)
           status="up"
-          if [ "$code" != "200" ]; then status="down"; fi
+          if [ -z "$code" ] || [ "$code" != "200" ]; then status="down"; fi
+          if [ -z "$code" ]; then code="0"; fi
           json=$(printf '{"ts":"%s","status":"%s","code":%s}' "$ts" "$status" "$code")
-          echo "$json" > public/monitor-logs/latest.json
+          mkdir -p monitor-logs
+          echo "$json" > monitor-logs/latest.json
+          echo "$json"
           echo "::notice::$ts | $status ($code)"
-          echo "result=$json" >> "$GITHUB_OUTPUT"
 
       - name: Commit status
         env:
@@ -33,6 +35,13 @@ jobs:
         run: |
           git config --global user.name "gh-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/monitor-logs/latest.json
-          git diff --cached --quiet && echo "No changes" || git commit -m "chore(monitor): update latest.json (${{ steps.check.outputs.result }})"
-          git push
+          git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+          git branch || true
+          git status --porcelain || true
+          git add monitor-logs/latest.json || true
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "chore(monitor): update latest.json"
+            git push origin HEAD:master
+          fi
